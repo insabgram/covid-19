@@ -82,32 +82,6 @@ const Index = () => {
 
       <Twitter />
 
-      {/* <section className="container">
-        <div className="card-deck my-4">
-          <div className="card border-0 shadow mb-4 mb-md-0">
-            <div className="card-header bg-transparent border-bottom-0 d-flex justify-content-between align-items-center p-2">@KKMPutrajaya <i className="material-icons small">unfold_more</i></div>
-            <a className="twitter-timeline p-2" 
-              href="https://twitter.com/KKMPutrajaya?ref_src=twsrc%5Etfw" 
-              data-height="400" 
-              data-chrome="noheader nofooter noborders noscrollbar">
-              <Loader />
-            </a>
-            <div className="card-footer bg-transparent border-top-0 d-flex justify-content-start align-items-center p-2"><a className="text-uppercase small" href="https://twitter.com/KKMPutrajaya" target="_blank" rel="noopener noreferrer">View on Twitter</a></div>
-          </div>
-
-          <div className="card border-0 shadow mb-4 mb-md-0">
-            <div className="card-header bg-transparent border-bottom-0 d-flex justify-content-between align-items-center p-2">@bernamadotcom <i className="material-icons small">unfold_more</i></div>
-            <a className="twitter-timeline p-2" 
-              href="https://twitter.com/bernamadotcom?ref_src=twsrc%5Etfw" 
-              data-height="400" 
-              data-chrome="noheader nofooter noborders noscrollbar">
-              <Loader />
-            </a>
-            <div className="card-footer bg-transparent border-top-0 d-flex justify-content-start align-items-center p-2"><a className="text-uppercase small" href="https://twitter.com/bernamadotcom" target="_blank" rel="noopener noreferrer">View on Twitter</a></div>
-          </div>
-        </div>
-      </section> */}
-
       <div className="embed-responsive embed-responsive-16by9">
         <iframe className="embed-responsive-item" src="https://www.outbreak.my/map" title="Covid-19"></iframe>
       </div>

@@ -33,16 +33,11 @@
     "prettier": "^1.19.1",
     "surge": "latest"
   },
-  "git": {
-    "scripts": {
-      "pre-push": "gatsby clean && gatsby build && surge --project public/ --domain covid19-malaysia.surge.sh"
-    }
-  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/insabgram/gatsby-base"
+    "url": "https://github.com/insabgram/covid-19"
   },
   "bugs": {
-    "url": "https://github.com/insabgram/gatsby-base/issues"
+    "url": "https://github.com/insabgram/covid-19/issues"
   }
 }
