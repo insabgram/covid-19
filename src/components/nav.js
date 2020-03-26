@@ -5,12 +5,14 @@ export default () => {
   return (
     <nav className="navbar navbar-expand-md navbar-light fixed-top bg-light border-0">
       <div className="container">
-        <div className="col d-flex justify-content-start align-items-center px-0">
-          <i className="material-icons">bug_report</i>
-          <Link className="navbar-brand mr-0" to="/"><span className="font-weight-light h6">/ Tracker</span></Link>
+        <div className="col d-flex justify-content-start px-0">
+          <Link className="d-flex align-items-center navbar-brand mr-0" to="/">
+            <i className="material-icons">bug_report</i>
+            <span className="font-weight-light h6 mb-0">/ Tracker</span>
+          </Link>
         </div>
         <div className="col px-0 d-flex justify-content-end">
-          <a className="font-weight-light" href="https://staythefuckhome.com/" target="_blank" rel="noopener noreferrer">Stay home, please!</a>
+          <a className="font-weight-light" href="https://staythefuckhome.com/sfw/" target="_blank" rel="noopener noreferrer">#StayTheF—Home</a>
         </div>
       </div>
     </nav>

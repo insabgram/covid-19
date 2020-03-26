@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `Covid-19 Tracker`,
-    description: `A quickie update on Covid-19 (Malaysian Edition)`,
+    description: `A quickie update on Covid-19 (Malaysia Edition)`,
     author: `@insabgram`,
     siteUrl: `https://gatsby.dev`,
     social: {

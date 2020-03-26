@@ -81,10 +81,6 @@ const Index = () => {
       </section>
 
       <Twitter />
-
-      <div className="embed-responsive embed-responsive-16by9">
-        <iframe className="embed-responsive-item" src="https://www.outbreak.my/map" title="Covid-19"></iframe>
-      </div>
     </Layout>
   )
 }
