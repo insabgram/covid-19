@@ -1,6 +1,8 @@
 // Global CSS
 import 'bootstrap/dist/css/bootstrap.css'
 import 'material-design-icons/iconfont/material-icons.css'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
 // // Global JS
 // import 'jquery/dist/jquery.min.js'

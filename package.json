@@ -24,10 +24,19 @@
     "moment": "^2.24.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
-    "react-helmet": "^5.2.1"
+    "react-helmet": "^5.2.1",
+    "react-slick": "^0.25.2",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
-    "prettier": "^1.19.1"
+    "git-scripts": "^0.4.3",
+    "prettier": "^1.19.1",
+    "surge": "latest"
+  },
+  "git": {
+    "scripts": {
+      "pre-push": "gatsby clean && gatsby build && surge --project public/ --domain covid19-malaysia.surge.sh"
+    }
   },
   "repository": {
     "type": "git",

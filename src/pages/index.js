@@ -4,6 +4,7 @@ import moment from 'moment'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import Loader from '../components/loader'
+import Twitter from '../components/twitter'
 
 const Index = () => {
   const [loading, setLoading] = useState(true)
@@ -79,7 +80,9 @@ const Index = () => {
       )}
       </section>
 
-      <section className="container">
+      <Twitter />
+
+      {/* <section className="container">
         <div className="card-deck my-4">
           <div className="card border-0 shadow mb-4 mb-md-0">
             <div className="card-header bg-transparent border-bottom-0 d-flex justify-content-between align-items-center p-2">@KKMPutrajaya <i className="material-icons small">unfold_more</i></div>
@@ -103,7 +106,7 @@ const Index = () => {
             <div className="card-footer bg-transparent border-top-0 d-flex justify-content-start align-items-center p-2"><a className="text-uppercase small" href="https://twitter.com/bernamadotcom" target="_blank" rel="noopener noreferrer">View on Twitter</a></div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <div className="embed-responsive embed-responsive-16by9">
         <iframe className="embed-responsive-item" src="https://www.outbreak.my/map" title="Covid-19"></iframe>
