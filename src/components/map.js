@@ -1,29 +1,52 @@
-import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import Chart from 'react-google-charts'
 
 const Map = () => {
-  const data = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-          }
-        }
-      }
-    `
-  )
+  const [error, setError] = useState(false)
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    axios.get('https://corona.lmao.ninja/countries/malaysia')
+      .then(response => {
+        setData(response.data)
+      })
+      .catch(error => {
+        setError(true)
+      })
+  }, [])
   return (
-    <section className="container-fluid location">
-      <div className="row">
-        <div className="col p-0">
-          <div className="embed-responsive embed-responsive-21by9">
-            <iframe className="embed-responsive-item" width="1200" height="900" id="gmap_canvas" src="https://maps.google.com/maps?q=malaysia&t=&z=5&ie=UTF8&iwloc=&output=embed" frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0" title={data.site.siteMetadata.description}></iframe>
-          </div>
-        </div>
-      </div>
-    </section>
+    <Chart
+      className="img-fluid"
+      width={'100%'}
+      height={'auto'}
+      chartType="GeoChart"
+      data={[
+        ['Country', 'Case', 'Today'],
+        [data.country, data.cases, data.todayCases]
+      ]}
+      options={{
+        region: 'MY',
+        colorAxis: { colors: '#17a2b8' },
+        tooltip: { trigger: 'focus' }
+      }}
+      // data={[
+      //   ['Latitude', 'Longitude', 'Location', 'Case'],
+      //   [3.132716, 101.683538, 'Menara UEM', 1],
+      //   [3.1906183, 101.7326796, 'Wisma Felcra', 10],
+      //   [3.079986, 101.593863, 'Subang Jaya Medical Centre', 3]
+      // ]}
+      // options={{
+      //   region: 'MY',
+      //   displayMode: 'markers',
+      //   colorAxis: { minValue: 0, maxValue: 1796, colors: ['#17a2b8', '#ffc107', '#dc3545'] },
+      //   magnifyingGlass: { enable: true },
+      //   markerOpacity: 0.5,
+      //   tooltip: { trigger: 'focus' }
+      // }}
+      mapsApiKey="API_KEY_HERE"
+      // rootProps={{ 'data-testid': '1' }}
+    />
   )
 }
 
