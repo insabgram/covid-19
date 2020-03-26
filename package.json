@@ -29,9 +29,7 @@
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
-    "git-scripts": "^0.4.3",
-    "prettier": "^1.19.1",
-    "surge": "latest"
+    "prettier": "^1.19.1"
   },
   "repository": {
     "type": "git",
