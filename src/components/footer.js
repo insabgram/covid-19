@@ -1,7 +1,7 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 
-export default ({ children }) => {
+const Footer = ({ children }) => {
   const data = useStaticQuery(
     graphql`
       query {
@@ -31,3 +31,5 @@ export default ({ children }) => {
     </>
   )
 }
+
+export default Footer

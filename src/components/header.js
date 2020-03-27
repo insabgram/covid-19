@@ -1,3 +1,5 @@
 import React from 'react'
 
-export default ({ children }) => <header>{children}</header>
+const Header = ({ children }) => <header>{children}</header>
+
+export default Header

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
 
-export default () => {
+const Nav = () => {
   return (
     <nav className="navbar navbar-expand-md navbar-light fixed-top bg-light border-0">
       <div className="container">
@@ -18,3 +18,5 @@ export default () => {
     </nav>
   )
 }
+
+export default Nav

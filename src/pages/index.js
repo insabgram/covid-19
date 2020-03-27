@@ -4,12 +4,28 @@ import moment from 'moment'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import Loader from '../components/loader'
-import Twitter from '../components/twitter'
+import Slider from 'react-slick'
+import Card from '../components/card'
 
 const Index = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [data, setData] = useState([])
+  const settings = {
+    slidesToShow: 2.1,
+    slidesToScroll: 1,
+    dots: true,
+    infinite: false,
+    arrows: false,
+    swipeToSlide: true,
+    responsive: [{
+      breakpoint: 737,
+      settings: {
+        slidesToShow: 1.08,
+        slidesToScroll: 1
+      }
+    }]
+  }
 
   useEffect(() => {
     axios.get('https://api.coronatracker.com/v3/stats/worldometer/country?countryCode=MY')
@@ -80,7 +96,14 @@ const Index = () => {
       )}
       </section>
 
-      <Twitter />
+      <section className="twitter container-fluid mb-5 px-0">
+        <Slider {...settings}>
+          <Card title="KKMPutrajaya" handle="KKMPutrajaya" />
+          <Card title="Jabatan Perdana Menteri" handle="jpmgov_" />
+          <Card title="Majlis Keselamatan Negara" handle="MKNJPM" />
+          <Card title="BERNAMA" handle="bernamadotcom" />
+        </Slider>
+      </section>
     </Layout>
   )
 }
