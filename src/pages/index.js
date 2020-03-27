@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import moment from 'moment'
 import Layout from '../components/layout'
@@ -6,10 +6,71 @@ import SEO from '../components/seo'
 import Loader from '../components/loader'
 import Twitter from '../components/twitter'
 
+import L from 'leaflet'
+import { Marker } from 'react-leaflet'
+import { promiseToFlyTo, getCurrentLocation } from '../components/map/lib/util'
+import Map from '../components/map'
+
+const LOCATION = {
+  lat: 3.1390,
+  lng: 101.6869
+}
+const CENTER = [LOCATION.lat, LOCATION.lng]
+const DEFAULT_ZOOM = 6
+const ZOOM = 10
+
+const timeToZoom = 2000
+const timeToOpenPopupAfterZoom = 4000
+const timeToUpdatePopupAfterZoom = timeToOpenPopupAfterZoom + 3000
+
+const popupContentHello = `<h3 class="font-weight-light">Hello 👋</h3>`
+const popupContentGatsby = `
+  <h4 class="font-weight-light">This is a public service announcement 📣</h4>
+  <p class="font-weight-light my-0"><span class="font-weight-bold">Please stay home!</span> We all have a role to play to prevent the spread of germs within our communities— to protect ourselves, our families, and those at higher risk.</p>
+`
+
 const Index = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [data, setData] = useState([])
+
+  const markerRef = useRef()
+
+  async function mapEffect({ leafletElement } = {}) {
+    if ( !leafletElement ) return
+
+    const popup = L.popup({
+      maxWidth: 300
+    })
+
+    const location = await getCurrentLocation().catch(() => LOCATION )
+
+    const { current = {} } = markerRef || {}
+    const { leafletElement: marker } = current
+
+    marker.setLatLng( location )
+    popup.setLatLng( location )
+    popup.setContent( popupContentHello )
+
+    setTimeout( async () => {
+      await promiseToFlyTo( leafletElement, {
+        zoom: ZOOM,
+        center: location
+      })
+
+      marker.bindPopup( popup )
+
+      setTimeout(() => marker.openPopup(), timeToOpenPopupAfterZoom )
+      setTimeout(() => marker.setPopupContent( popupContentGatsby ), timeToUpdatePopupAfterZoom )
+    }, timeToZoom )
+  }
+
+  const mapSettings = {
+    center: CENTER,
+    defaultBaseMap: 'OpenStreetMap',
+    zoom: DEFAULT_ZOOM,
+    mapEffect
+  }
 
   useEffect(() => {
     axios.get('https://api.coronatracker.com/v3/stats/worldometer/country?countryCode=MY')
@@ -24,7 +85,7 @@ const Index = () => {
   return (
     <Layout>
       <SEO />
-
+      
       <section className="jumbotron bg-light mb-0">
       { loading ? (
         <Loader />
@@ -80,11 +141,11 @@ const Index = () => {
       )}
       </section>
 
-      <Twitter />
+      <Map {...mapSettings}>
+        <Marker ref={markerRef} position={CENTER} />
+      </Map>
 
-      <div className="embed-responsive embed-responsive-16by9">
-        <iframe className="embed-responsive-item" src="https://www.outbreak.my/map" title="Covid-19"></iframe>
-      </div>
+      <Twitter />
     </Layout>
   )
 }
