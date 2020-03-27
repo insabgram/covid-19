@@ -6,7 +6,7 @@ export default () => {
     <nav className="navbar navbar-expand-md navbar-light fixed-top bg-light border-0">
       <div className="container">
         <div className="col d-flex justify-content-start px-0">
-          <Link className="d-flex align-items-center navbar-brand mr-0" to="/">
+          <Link className="d-flex align-items-center navbar-brand mr-0 py-1" to="/">
             <i className="material-icons">bug_report</i>
             <span className="font-weight-light h6 mb-0">/ Tracker</span>
           </Link>
