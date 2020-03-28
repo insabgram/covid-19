@@ -11,28 +11,28 @@ import { Marker } from 'react-leaflet'
 import { promiseToFlyTo, getCurrentLocation } from '../components/map/lib/util'
 import Map from '../components/map'
 
-const LOCATION = {
-  lat: 3.1390,
-  lng: 101.6869
-}
-const CENTER = [LOCATION.lat, LOCATION.lng]
-const DEFAULT_ZOOM = 6
-const ZOOM = 10
-
-const timeToZoom = 2000
-const timeToOpenPopupAfterZoom = 4000
-const timeToUpdatePopupAfterZoom = timeToOpenPopupAfterZoom + 3000
-
-const popupContentHello = `<h3 class="font-weight-light">Hello 👋</h3>`
-const popupContentGatsby = `
-  <h4 class="font-weight-light">This is a public service announcement 📣</h4>
-  <p class="font-weight-light my-0"><span class="font-weight-bold">Please stay home!</span> We all have a role to play to prevent the spread of germs within our communities— to protect ourselves, our families, and those at higher risk.</p>
-`
-
 const Index = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [data, setData] = useState([])
+
+  const LOCATION = {
+    lat: 3.1390,
+    lng: 101.6869
+  }
+  const CENTER = [LOCATION.lat, LOCATION.lng]
+  // const DEFAULT_ZOOM = 6
+  // const ZOOM = 10
+
+  // const timeToZoom = 2000
+  // const timeToOpenPopupAfterZoom = 4000
+  // const timeToUpdatePopupAfterZoom = timeToOpenPopupAfterZoom + 3000
+
+  const popupContentHello = `<h3 class="font-weight-light">Hello 👋</h3>`
+  const popupContentGatsby = `
+    <h4 class="font-weight-light">This is a public service announcement 📣</h4>
+    <p class="font-weight-light my-0"><span class="font-weight-bold">Please stay home!</span> We all have a role to play to prevent the spread of germs within our communities— to protect ourselves, our families, and those at higher risk.</p>
+  `
 
   const markerRef = useRef()
 
@@ -54,21 +54,21 @@ const Index = () => {
 
     setTimeout( async () => {
       await promiseToFlyTo( leafletElement, {
-        zoom: ZOOM,
+        zoom: 10, //ZOOM
         center: location
       })
 
       marker.bindPopup( popup )
 
-      setTimeout(() => marker.openPopup(), timeToOpenPopupAfterZoom )
-      setTimeout(() => marker.setPopupContent( popupContentGatsby ), timeToUpdatePopupAfterZoom )
-    }, timeToZoom )
+      setTimeout(() => marker.openPopup(), 4000 ) //timeToOpenPopupAfterZoom
+      setTimeout(() => marker.setPopupContent( popupContentGatsby ), 7000 ) //timeToUpdatePopupAfterZoom = timeToOpenPopupAfterZoom + 3000
+    }, 2000 ) //timeToZoom
   }
 
   const mapSettings = {
     center: CENTER,
     defaultBaseMap: 'OpenStreetMap',
-    zoom: DEFAULT_ZOOM,
+    zoom: 6, //DEFAULT_ZOOM
     mapEffect
   }
 
