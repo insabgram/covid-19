@@ -1,0 +1,16 @@
+html,
+body,
+#___gatsby {
+  height: 100% !important;
+}
+  #gatsby-focus-wrapper {
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -ms-flex-direction: column! important;
+    flex-direction: column !important;
+    height: 100% !important;
+  }
+
+*:focus {
+  outline: none !important;
+}

@@ -11,6 +11,7 @@ const Index = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [data, setData] = useState([])
+  const [date, setDate] = useState('')
   const settings = {
     slidesToShow: 2.1,
     slidesToScroll: 1,
@@ -28,14 +29,29 @@ const Index = () => {
   }
 
   useEffect(() => {
-    axios.get('https://api.coronatracker.com/v3/stats/worldometer/country?countryCode=MY')
-      .then(response => {
-        setLoading(false)
-        setData(response.data[0])
-      })
-      .catch(error => {
-        setError(true)
-      })
+    // axios
+    // .get('https://api.coronatracker.com/v3/stats/worldometer/country?countryCode=MY', { timeout: 5000 })
+    // .then(response => {
+    //   setLoading(false)
+    //   setData(response.data[0])
+    //   setDate(moment(response.data[0]).fromNow())
+    // })
+    // .catch(error => {
+    //   console.log(error)
+    //   setLoading(false)
+    //   setError(true)
+    // })
+    axios
+    .all([axios.get('https://corona.lmao.ninja/v2/all'), axios.get('https://corona.lmao.ninja/v2/countries/malaysia')])
+    .then(axios.spread(function (all, country) {
+      setLoading(false)
+      setDate(moment(all.data.updated).fromNow())
+      setData(country.data)
+    }))
+    .catch(error => {
+      setLoading(false)
+      setError(true)
+    })
   }, [])
   return (
     <Layout>
@@ -51,11 +67,11 @@ const Index = () => {
         </div>
       ) : (
         <div className="container px-md-5 text-center">
-          <img src={`https://www.countryflags.io/${data.countryCode}/flat/64.png`} alt={data.country} />
+          <img src='https://www.countryflags.io/MY/flat/64.png' alt={data.country} />
           <h1>{data.country}</h1>
 
           <div className="d-flex justify-content-center">
-            <p className="small text-secondary mb-4">Data updated {moment(data.lastUpdated).fromNow()}</p>
+            <p className="small text-secondary mb-4">Data updated {date}</p>
           </div>
 
           <div className="d-flex justify-content-center">
@@ -65,17 +81,17 @@ const Index = () => {
           <div className="row">
             <div className="col">
               <p>Case<br />
-                <span className="text-info h1">{data.totalConfirmed}</span><br />
-                <span className="text-info">&#43; {data.dailyConfirmed}</span>
+                <span className="text-info h1">{data.cases}</span><br />
+                <span className="text-info">&#43; {data.todayCases}</span>
               </p>
             </div>
             <div className="col">
-              <p>Recovered<br /><span className="text-success h1">{data.totalRecovered}</span></p>
+              <p>Recovered<br /><span className="text-success h1">{data.recovered}</span></p>
             </div>
             <div className="col">
               <p>Death<br />
-                <span className="text-danger h1">{data.totalDeaths}</span><br />
-                <span className="text-danger">&#43; {data.dailyDeaths}</span>
+                <span className="text-danger h1">{data.deaths}</span><br />
+                <span className="text-danger">&#43; {data.todayDeaths}</span>
               </p>
             </div>
           </div>
@@ -86,10 +102,10 @@ const Index = () => {
 
           <div className="row">
             <div className="col">
-              <p>Active<br /><span className="text-info h1">{data.activeCases}</span></p>
+              <p>Active<br /><span className="text-info h1">{data.active}</span></p>
             </div>
             <div className="col">
-              <p>Critical<br /><span className="text-warning h1">{data.totalCritical}</span></p>
+              <p>Critical<br /><span className="text-warning h1">{data.critical}</span></p>
             </div>
           </div>
         </div>
@@ -99,6 +115,7 @@ const Index = () => {
       <section className="twitter container-fluid mb-5 px-0">
         <Slider {...settings}>
           <Card title="KKMPutrajaya" handle="KKMPutrajaya" />
+          <Card title="MYSumber Official" handle="mysumber" />
           <Card title="Jabatan Perdana Menteri" handle="jpmgov_" />
           <Card title="Majlis Keselamatan Negara" handle="MKNJPM" />
           <Card title="BERNAMA" handle="bernamadotcom" />
