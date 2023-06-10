@@ -17,7 +17,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
-    "gatsby": "^2.30.1",
+    "gatsby": "^4.25.7",
     "gatsby-plugin-react-helmet": "^3.8.0",
     "gatsby-plugin-remove-serviceworker": "^1.0.0",
     "gatsby-plugin-twitter": "^2.8.0",
